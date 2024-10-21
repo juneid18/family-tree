@@ -22,7 +22,7 @@ To get started with the Family Tree app locally, follow these steps:
 **Clone the repository**:
 
 ```bash
-git clone https://github.com/yourusername/myfamily.git
+git clone https://github.com/juneid18/family-tree.git
 cd myfamily
 ```
 
