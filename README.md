@@ -1,50 +1,51 @@
-# Welcome to your Expo app 👋
+# MyFamily - Family Tree App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Overview
 
-## Get started
+**MyFamily** is a React Native app built using Expo that helps users create and visualize family trees. Users can add family members, view detailed family structures, and navigate through generations using an intuitive interface.
 
-1. Install dependencies
+This project leverages popular libraries like React Native, Expo, React Navigation, and Axios to create a smooth user experience across Android, iOS, and Web platforms.
 
-   ```bash
-   npm install
-   ```
+## Features
 
-2. Start the app
+- **Create and View Family Trees**: Users can create personalized family trees, add family members, and view the hierarchy.
+- **Cross-Platform**: Built with Expo, this app runs seamlessly on Android, iOS, and Web.
+- **Image Upload**: Allows users to upload family member images using Cloudinary.
+- **Smooth Navigation**: Uses React Navigation for intuitive navigation through family members and tree branches.
+- **Persistent Data**: Saves data using `AsyncStorage` for offline access and secure storage.
+- **Responsive UI**: Designed with an elegant, responsive interface to provide a clean and user-friendly experience.
 
-   ```bash
-    npx expo start
-   ```
+## Installation
 
-In the output, you'll find options to open the app in a
+To get started with the Family Tree app locally, follow these steps:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+**Clone the repository**:
 
 ```bash
-npm run reset-project
+git clone https://github.com/yourusername/myfamily.git
+cd myfamily
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## App Video
 
-## Learn more
+<video controls src="assets/images/Untitled design.mp4" title="myFamily"></video>
 
-To learn more about developing your project with Expo, look at the following resources:
+## Project Structure
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+   src/ - Main source code for the Family Tree app.
+      components/ - Reusable UI components.
+      screens/ - Screens for different parts of the app.
+      navigation/ - Navigation configurations using React Navigation.
+      assets/ - Static assets like fonts, images, etc.
+      utils/ - Utility functions and helpers.
 
-## Join the community
 
-Join our community of developers creating universal apps.
+## Technologies Used:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+   **React Native:** Framework for building mobile apps.
+   **Expo:** Tools and services for building and deploying React Native apps.
+   **React Navigation:** Provides navigation between different screens.
+   **Axios:** For handling HTTP requests.
+   **Async Storage:** To store data locally on the device.
+   **Cloudinary:** For image uploads and cloud storage.
+   **Jest:** Testing framework for unit and snapshot tests

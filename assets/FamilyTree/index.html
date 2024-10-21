@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Tree</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #tree-container {
+            width: 100%;
+            height: 800px;
+            margin-top: 100px;
+        }
+
+        .node {
+            cursor: pointer;
+        }
+
+        .node circle {
+            fill: #69b3a2;
+        }
+
+        .node text {
+            font: 12px sans-serif;
+        }
+
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 2px;
+        }
+
+    </style>
+    <div id="tree-container"></div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        // Sample family tree data
+        const familyData = {
+            name: "Main Parent",
+            children: [
+                {
+                    name: "Parent 1",
+                    children: [
+                        { name: "Child 1" },
+                        { name: "Child 2" }
+                    ]
+                },
+                {
+                    name: "Parent 2",
+                    children: [
+                        { name: "Child 3" },
+                        { name: "Child 4" }
+                    ]
+                }
+            ]
+        };
+
+        // Set dimensions and margins for the tree
+        const margin = { top: 20, right: 120, bottom: 20, left: 120 },
+              width = 960 - margin.right - margin.left,
+              height = 600 - margin.top - margin.bottom;
+
+        const svg = d3.select("#tree-container")
+            .append("svg")
+            .attr("width", width + margin.right + margin.left)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        const tree = d3.tree()
+            .size([width, height]); // Vertical layout
+
+        const root = d3.hierarchy(familyData);
+
+        // Create the tree structure
+        tree(root);
+
+        // Create links between nodes
+        svg.selectAll(".link")
+            .data(root.links())
+            .enter().append("path")
+            .attr("class", "link")
+            .attr("d", d3.linkVertical() // Use linkVertical for vertical orientation
+                .x(d => d.x) // d.x is the vertical position (y-axis)
+                .y(d => d.y)); // d.y is the horizontal position (x-axis)
+
+        // Create nodes
+        const node = svg.selectAll(".node")
+            .data(root.descendants())
+            .enter().append("g")
+            .attr("class", d => "node" + (d.children ? " node--internal" : " node--leaf"))
+            .attr("transform", d => `translate(${d.x},${d.y})`) // Positioning nodes
+            .on("click", function(event, d) {
+                // Toggle children on click
+                d.children = d.children ? null : d.data.children; // Toggle children
+                update(root); // Re-draw tree
+            });
+
+        // Append circles for nodes
+        node.append("circle")
+            .attr("r", 10);
+
+        // Append text for node names and rotate them to vertical
+        node.append("text")
+            .attr("dy", 3)
+            .attr("x", 15) // Adjusting x position
+            .attr("y", 0) // Centering vertically
+            .attr("transform", "rotate(0)") // Rotate text to be vertical
+            .style("text-anchor", "start") // Align text starting from the point
+            .text(d => d.data.name);
+
+        function update(source) {
+            // Re-compute the tree layout
+            const nodes = tree(root);
+            const links = root.links();
+
+            // Update the nodes
+            svg.selectAll(".node")
+                .data(nodes.descendants())
+                .join("g")
+                .attr("class", d => "node" + (d.children ? " node--internal" : " node--leaf"))
+                .attr("transform", d => `translate(${d.x},${d.y})`);
+
+            // Update links
+            svg.selectAll(".link")
+                .data(links)
+                .join("path")
+                .attr("class", "link")
+                .attr("d", d3.linkVertical()
+                    .x(d => d.x)
+                    .y(d => d.y));
+        }
+
+    </script>
+</body>
+</html>
+
+<!--
+We will create a family tree using just CSS(3)
+The markup will be simple nested lists
+-->
